@@ -19,12 +19,14 @@ const Header = () => {
     );
 }
 
-const RestaurantCard = () => {
+const RestaurantCard = (props) => {
+    const {cuisine, resName} = props
+    // console.log("props aree----", props, resName)
     return (
         <div className='res-card' style={{backgroundColor : "#f0f0f0"}}>
             <img className="res-logo" src="https://imgs.search.brave.com/IOlz2aQiGVjOLJGY6jgOE0WHKcCUudgJHbAWBPltKEE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9y/aXNvdHRvLXdpdGgt/YXNwYXJhZ3VzLWJl/YW5zLXp1Y2NoaW5p/LWdyZWVuLXBlYXNf/MjgyOS04Mjc2Lmpw/Zz9zZW10PWFpc19o/eWJyaWQ" alt="res-logo" />
-            <h3>first outlet</h3>
-            <h4>Biryani, North Indian</h4>
+            <h3>{resName}</h3>
+            <h4>{cuisine}</h4>
             <h4>4.4 stars</h4>
             <h4>38 minutes</h4>
         </div>
@@ -36,18 +38,8 @@ const Body = () =>{
         <div className='body'>
             <div className='search'>Search</div>
             <div className='res-container'>
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
+                <RestaurantCard resName="First Outlet" cuisine="Biryani, North Indian"/>
+                <RestaurantCard resName="KFC" cuisine="Burger, Fast Food" />
             </div>
         </div>
     );
