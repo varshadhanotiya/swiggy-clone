@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfRestaurents, setListOfRestaurents] = useState([]);
@@ -16,7 +17,9 @@ const Body = () => {
     const json = await data.json();
 
     //optional chaining
-    setListOfRestaurents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setListOfRestaurents(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   const filterTopRated = () => {
@@ -26,11 +29,9 @@ const Body = () => {
     setListOfRestaurents(filteredList);
   };
 
-  if(listOfRestaurents.length === 0){
-    return <h1>Loading...</h1>
-  }
-
-  return (
+  return listOfRestaurents.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button className="filter-btn" onClick={filterTopRated}>
