@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import { resList } from "../utils/mockData";
 
 const Body = () => {
-  const [listOfRestaurents, setListOfRestaurents] = useState(resList);
+  const [listOfRestaurents, setListOfRestaurents] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=12.9352403&lng=77.624532&carousel=true&third_party_vendor=1"
+    );
+
+    const json = await data.json();
+
+    setListOfRestaurents(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+  };
 
   const filterTopRated = () => {
     const filteredList = listOfRestaurents.filter(
@@ -22,10 +36,7 @@ const Body = () => {
       <div className="res-container">
         {listOfRestaurents.length > 0 ? (
           listOfRestaurents.map((restaurant) => (
-            <RestaurantCard
-              key={restaurant.info.id}
-              resData={restaurant}
-            />
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
           ))
         ) : (
           <p>No restaurants to display</p>
