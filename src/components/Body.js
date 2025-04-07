@@ -15,7 +15,8 @@ const Body = () => {
 
     const json = await data.json();
 
-    setListOfRestaurents(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    //optional chaining
+    setListOfRestaurents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   const filterTopRated = () => {
@@ -24,6 +25,10 @@ const Body = () => {
     );
     setListOfRestaurents(filteredList);
   };
+
+  if(listOfRestaurents.length === 0){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div className="body">
