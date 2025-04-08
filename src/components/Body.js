@@ -39,7 +39,7 @@ const Body = () => {
     setFilteredRestaurant(filteredList);
   };
 
-  return filteredRestaurant.length === 0 ? (
+  return filteredRestaurant?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -75,7 +75,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurant.length > 0 ? (
+        {filteredRestaurant?.length > 0 ? (
           filteredRestaurant.map((restaurant) => (
             <RestaurantCard key={restaurant.info.id} resData={restaurant} />
           ))
